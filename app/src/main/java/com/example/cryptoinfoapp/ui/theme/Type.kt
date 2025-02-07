@@ -7,28 +7,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with
+// Define Material 3 Typography
 val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+    displayLarge = TextStyle( //h1
+        fontWeight = FontWeight.Bold,
+        fontSize = 30.sp,
     ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
+    displayMedium = TextStyle( //h2
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 24.sp
+    ),
+    displaySmall = TextStyle( //h3
         fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 20.sp
+    ),
+    headlineLarge = TextStyle( //h4
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp
+    ),
+    bodyLarge = TextStyle( //body1
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
+    ),
+    bodyMedium = TextStyle( //body2
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
     )
-    */
 )
