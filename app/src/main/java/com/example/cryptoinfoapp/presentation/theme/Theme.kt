@@ -1,4 +1,4 @@
-package com.example.cryptoinfoapp.ui.theme
+package com.example.cryptoinfoapp.presentation.theme
 
 
 
