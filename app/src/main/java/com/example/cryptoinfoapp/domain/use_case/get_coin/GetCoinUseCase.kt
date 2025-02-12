@@ -16,7 +16,6 @@ class GetCoinUseCase @Inject constructor(
     private val repository: CoinRepository
 )   {
     operator fun invoke(coinId: String): Flow<Resource<CoinDetail>> = flow {
-
         try {
             emit(Resource.Loading())
             val coin = repository.getCoinById(coinId).toCoinDetail()
