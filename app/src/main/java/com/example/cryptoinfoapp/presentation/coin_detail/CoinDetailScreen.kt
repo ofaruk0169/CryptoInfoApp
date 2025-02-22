@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.cryptoinfoapp.presentation.Screen
 import com.example.cryptoinfoapp.presentation.coin_detail.components.CoinTag
 import com.example.cryptoinfoapp.presentation.coin_detail.components.TeamListItem
@@ -35,8 +36,16 @@ import com.example.cryptoinfoapp.presentation.coin_list.components.CoinListItem
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CoinDetailScreen(
-    viewModel: CoinDetailViewModel = hiltViewModel()
+    viewModel: CoinDetailViewModel = hiltViewModel(),
+    navController: NavController = rememberNavController()
 ) {
+    val coinId = navController.currentBackStackEntry?.arguments?.getString("coinId")
+
+    // Ensure the ViewModel gets the coinId and fetches the data
+    if (coinId != null) {
+        viewModel.getCoin(coinId)
+    }
+
     val state = viewModel.state.value
     Box(modifier = Modifier.fillMaxSize()) {
         state.coin?.let { coin ->

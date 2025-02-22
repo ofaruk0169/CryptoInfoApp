@@ -29,7 +29,7 @@ class CoinDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getCoin(coinId: String) {
+    fun getCoin(coinId: String) {
         getCoinUseCase(coinId).onEach { result ->
             when(result) {
                 is Resource.Success -> {
