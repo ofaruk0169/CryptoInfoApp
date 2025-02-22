@@ -53,7 +53,7 @@ fun CoinDetailScreen(
                     ) {
                         Text(
                             text = "${coin.rank}. ${coin.name} (${coin.symbol})",
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.headlineMedium,
                             modifier = Modifier.weight(8f)
                         )
                         Text(
@@ -74,7 +74,7 @@ fun CoinDetailScreen(
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(
                         text = "Tags",
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.headlineSmall
                     )
                     Spacer(modifier = Modifier.height(15.dp))
                     FlowRow(
@@ -89,7 +89,7 @@ fun CoinDetailScreen(
                     Spacer(modifier =  Modifier.height(15.dp))
                     Text(
                         text = "Team Members",
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.headlineSmall
                     )
                     Spacer(modifier =  Modifier.height(15.dp))
                 }
