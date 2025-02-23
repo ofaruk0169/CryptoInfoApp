@@ -1,33 +1,51 @@
 package com.example.cryptoinfoapp.di
 
-import com.example.cryptoinfoapp.common.Constants
 import com.example.cryptoinfoapp.data.remote.CoinPaprikaApi
-import com.example.cryptoinfoapp.data.repository.CoinRepositoryImpl
+import com.example.cryptoinfoapp.data.remote.dto.CoinDetailDto
+import com.example.cryptoinfoapp.data.remote.dto.CoinDto
+import com.example.cryptoinfoapp.data.remote.dto.Whitepaper
 import com.example.cryptoinfoapp.domain.repository.CoinRepository
+import kotlinx.coroutines.runBlocking
+import io.mockk.coEvery
+import io.mockk.mockk
+import javax.inject.Singleton
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.mockk.mockk
+import okhttp3.mockwebserver.MockWebServer
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object TestAppModule {
 
+    // Provide MockWebServer instance
     @Provides
     @Singleton
-    fun provideCoinPaprikaApi(): CoinPaprikaApi {
-        // Provide a mock implementation for testing
-        return mockk()
+    fun provideMockWebServer(): MockWebServer {
+        return MockWebServer()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMockCoinPaprikaApi(mockWebServer: MockWebServer): CoinPaprikaApi {
+        // Use MockWebServer URL for testing instead of the real API URL
+        val retrofit = Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))  // Use the mocked server's base URL
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(CoinPaprikaApi::class.java)
     }
 
     @Provides
     @Singleton
     fun provideCoinRepository(api: CoinPaprikaApi): CoinRepository {
-        // Provide a mock or fake repository for testing
-        return mockk()
+        // Mock the CoinRepository interface
+        return mockk<CoinRepository>(relaxed = true)
     }
 }
+
+
