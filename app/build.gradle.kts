@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.cryptoinfoapp"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.cryptoinfoapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -54,69 +54,96 @@ android {
             excludes += "META-INF/NOTICE.txt"
         }
     }
-
 }
 
+// Define versions
+val okhttpVersion = "4.11.0"
+val retrofitVersion = "2.9.0"
+val hiltVersion = "2.48" // Use 2.48 which is more stable with tests
+val coroutinesVersion = "1.7.3"
+val composeBomVersion = "2023.08.00" // Use a stable Compose BOM version
+
 dependencies {
+    // Core dependencies
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.activity:activity-compose:1.8.2")
 
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+
+    // Compose dependencies with BOM for version consistency
+    implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.20.0") // Use a version compatible with your Compose version
+
+    // Retrofit & OkHttp with consistent versions
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Add this line
-    implementation ("androidx.navigation:navigation-compose:2.7.6")
-    implementation("com.google.accompanist:accompanist-flowlayout:0.17.0")
 
+    // Dagger-Hilt
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    //implementation(libs.androidx.material3.android)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-
-
-    //Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
-    kapt("com.google.dagger:hilt-compiler:2.50")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-
-    // Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
-
-    //local unit tests (might need to change this and instrumentation below)
-    testImplementation ("androidx.test:core:1.6.1")
+    // Unit Tests
     testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test:core:1.5.0")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
-    testImplementation ("com.google.truth:truth:1.1.3")
-    testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.1")
-    testImplementation("io.mockk:mockk:1.13.12")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.8")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion")
+    testImplementation("io.mockk:mockk:1.13.5")
 
+    // Instrumentation Tests
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test:runner:1.5.2")
 
-    //Instrumentation tests
-    androidTestImplementation ("com.google.dagger:hilt-android-testing:2.37")
-    kaptAndroidTest ("com.google.dagger:hilt-android-compiler:2.50") //96?
-    androidTestImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1")
-    androidTestImplementation ("androidx.arch.core:core-testing:2.2.0")
-    androidTestImplementation ("com.google.truth:truth:1.1.3")
-    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation ("androidx.test:core-ktx:1.6.1")
-    androidTestImplementation ("com.squareup.okhttp3:mockwebserver:4.9.1")
-    androidTestImplementation ("io.mockk:mockk-android:1.13.12")
-    androidTestImplementation ("androidx.test:runner:1.6.1")
+    // Coroutines for testing
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+
+    // Hilt Testing
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
+
+    // MockWebServer for Android Tests
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion")
+
+    // Other testing dependencies
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("com.google.truth:truth:1.1.3")
+    androidTestImplementation("io.mockk:mockk-android:1.13.5")
+}
+
+// Force consistent OkHttp versions across all dependencies
+configurations.all {
+    resolutionStrategy {
+        force("com.squareup.okhttp3:okhttp:$okhttpVersion")
+        force("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+        force("com.squareup.okhttp3:mockwebserver:$okhttpVersion")
+
+        // Force consistent Coroutines versions
+        force("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+        force("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+        force("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    }
 }
 
 kapt {

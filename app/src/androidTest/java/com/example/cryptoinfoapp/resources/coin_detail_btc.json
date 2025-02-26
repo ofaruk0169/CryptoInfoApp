@@ -1,0 +1,55 @@
+{
+  "id": "btc-bitcoin",
+  "name": "Bitcoin",
+  "symbol": "BTC",
+  "rank": 1,
+  "is_active": true,
+  "is_new": false,
+  "type": "coin",
+  "description": "Bitcoin is a cryptocurrency and worldwide payment system.",
+  "message": "",
+  "open_source": true,
+  "hardware_wallet": true,
+  "started_at": "2009-01-03T00:00:00Z",
+  "development_status": "Working product",
+  "proof_type": "Proof of Work",
+  "org_structure": "Decentralized",
+  "hash_algorithm": "SHA256",
+  "links": {
+    "explorer": ["https://blockchain.info/"],
+    "facebook": ["https://facebook.com/bitcoin"],
+    "reddit": ["https://reddit.com/r/bitcoin"],
+    "source_code": ["https://github.com/bitcoin/bitcoin"],
+    "website": ["https://bitcoin.org/"],
+    "youtube": ["https://youtube.com/bitcoin"]
+  },
+  "links_extended": [],
+  "whitepaper": {
+    "link": "https://bitcoin.org/bitcoin.pdf",
+    "thumbnail": "https://static.coinpaprika.com/coin/btc-bitcoin/whitepaper.png"
+  },
+  "first_data_at": "2010-07-17T00:00:00Z",
+  "last_data_at": "2023-03-30T00:00:00Z",
+  "team": [
+    {
+      "id": "satoshi-nakamoto",
+      "name": "Satoshi Nakamoto",
+      "position": "Founder"
+    }
+  ],
+  "tags": [
+    {
+      "id": "segwit",
+      "name": "Segwit",
+      "coin_counter": 15,
+      "ico_counter": 0
+    },
+    {
+      "id": "cryptocurrency",
+      "name": "Cryptocurrency",
+      "coin_counter": 1037,
+      "ico_counter": 40
+    }
+  ],
+  "logo": "https://static.coinpaprika.com/coin/btc-bitcoin/logo.png"
+}
