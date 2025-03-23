@@ -22,6 +22,9 @@
       <SelectionState runConfigName="CoinDetailScreenTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="CoinAppEndToEndTest (1)">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
