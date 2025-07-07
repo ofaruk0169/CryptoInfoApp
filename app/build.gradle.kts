@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")
+    // Remove this line: kotlin("kapt")
+    id("com.google.devtools.ksp") // Add this instead
     id("dagger.hilt.android.plugin")
 }
 
@@ -59,9 +60,9 @@ android {
 // Define versions
 val okhttpVersion = "4.11.0"
 val retrofitVersion = "2.9.0"
-val hiltVersion = "2.48" // Use 2.48 which is more stable with tests
+val hiltVersion = "2.48"
 val coroutinesVersion = "1.7.3"
-val composeBomVersion = "2023.08.00" // Use a stable Compose BOM version
+val composeBomVersion = "2023.08.00"
 
 dependencies {
     // Core dependencies
@@ -84,7 +85,7 @@ dependencies {
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
-    implementation("com.google.accompanist:accompanist-flowlayout:0.20.0") // Use a version compatible with your Compose version
+    implementation("com.google.accompanist:accompanist-flowlayout:0.20.0")
 
     // Retrofit & OkHttp with consistent versions
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -93,9 +94,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
     implementation("com.google.code.gson:gson:2.10.1")
 
-    // Dagger-Hilt
+    // Dagger-Hilt - CHANGED: Use KSP instead of KAPT
     implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    ksp("com.google.dagger:hilt-android-compiler:$hiltVersion") // Changed from kapt to ksp
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // Unit Tests
@@ -119,9 +120,9 @@ dependencies {
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 
-    // Hilt Testing
+    // Hilt Testing - CHANGED: Use KSP instead of KAPT
     androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion") // Changed from kaptAndroidTest to kspAndroidTest
 
     // MockWebServer for Android Tests
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:$okhttpVersion")
@@ -146,6 +147,4 @@ configurations.all {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
+// Remove the kapt block entirely since we're using KSP now
